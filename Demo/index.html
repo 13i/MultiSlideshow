@@ -1,0 +1,64 @@
+<DOCTYPE html>
+<html>
+<head>
+    
+<meta charset="utf-8" />
+<title>MultiSlideshow Demo</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+}
+.slideshow {
+    width: 20%;
+    height: 25%;
+    float: left;
+    position: relative;
+    overflow: hidden;
+}
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+</style>
+    
+</head>
+<body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>
+<script src="js/mootools-more-1.4.0.1.js"></script>
+<script src="../Source/MultiSlideshow.js"></script>
+<script>
+var buildSlideshow = function(){
+    var slideshow = new Element('div', {
+        'class': 'slideshow'
+    });
+    (5).times(function(i){
+        new Element('div', {
+            'class': 'slide',
+            styles : {
+                'background-color': '#'+Math.floor(Math.random()*16777215).toString(16) // Source : http://paulirish.com/2009/random-hex-color-code-snippets/
+            }
+        }).inject(slideshow);
+    });
+    return slideshow;
+};
+window.addEvent('domready', function(){
+    var body = document.id(document.body);
+    (20).times(function(){
+        buildSlideshow().inject(body);
+    });
+    new MultiSlideshow('.slideshow', {
+        autoplay: true,
+        duration: 3000,
+        delay: 4000,
+        transition: 'fade'
+    });
+});
+</script>
+
+</body>
+</html>
